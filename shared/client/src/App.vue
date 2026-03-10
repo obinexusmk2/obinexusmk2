@@ -117,10 +117,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, ref, computed } from 'vue'
 import TraditionalAutomaton from '@/components/automaton/TraditionalAutomaton.vue'
 import TextFlowPattern from '@/components/common/TextFlowPattern/TextFlowPattern.vue'
 import CollatzAnalytics from '@/components/visualization/collatz/CollatzAnalytics.vue'
-import { type Trajectory } from '@/components/visualization/collatz/types'
+import type { Trajectory } from '@/components/visualization/collatz/types'
 
 export default defineComponent({
     name: 'App',
@@ -178,8 +179,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-// Import base styles from index-old.html
+<style>
+/* Base styles */
 :root {
     --primary-red: #F71735;
     --secondary-purple: #594157;
@@ -193,15 +194,14 @@ export default defineComponent({
     --font-family-mono: 'SF Mono', 'Fira Code', monospace;
 }
 
-// Rest of the styles from index-old.html
-/* Include all the styles from index-old.html here */
+/* App layout */
 .app {
     font-family: var(--font-family-primary);
     color: var(--secondary-purple);
     background: var(--background-primary);
 }
 
-// Additional component-specific styles
+/* Component-specific styles */
 .pattern-demos {
     margin: 1rem 0;
     padding: 1rem;
@@ -217,7 +217,7 @@ export default defineComponent({
     overflow: hidden;
 }
 
-// Responsive Design
+/* Responsive Design */
 @media (max-width: 768px) {
     .nav__links {
         display: none;
@@ -232,7 +232,7 @@ export default defineComponent({
     }
 }
 
-// Accessibility
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
     * {
         transition: none !important;

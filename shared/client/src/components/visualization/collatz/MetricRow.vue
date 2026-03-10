@@ -29,11 +29,11 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { 
-  ArrowUpRight, 
-  ArrowDownRight, 
-  Minus 
-} from 'lucide-react';
+import {
+  ArrowUpRight,
+  ArrowDownRight,
+  Minus
+} from 'lucide-vue-next';
 
 interface TrendData {
   value: number;

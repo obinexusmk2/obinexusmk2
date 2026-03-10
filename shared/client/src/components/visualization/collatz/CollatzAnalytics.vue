@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
-import TrajectoryCard from './components/TrajectoryCard.vue';
+import TrajectoryCard from './TragactoryCard.vue';
 import { type Trajectory, type TrajectoryMetrics } from './types';
 import { calculateTrajectoryMetrics } from './utils/metrics';
 

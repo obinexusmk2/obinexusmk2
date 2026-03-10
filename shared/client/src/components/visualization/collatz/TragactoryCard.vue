@@ -79,7 +79,6 @@
 import { defineComponent, PropType, computed } from 'vue';
 import MetricRow from './MetricRow.vue';
 import { type TrajectoryMetrics } from '../types';
-import { Steps, Peak, Average, Timer, Ratio, Probability } from 'lucide-react';
 
 interface TrendData {
   value: number;
@@ -91,13 +90,7 @@ export default defineComponent({
   name: 'TrajectoryCard',
 
   components: {
-    MetricRow,
-    Steps,
-    Peak,
-    Average,
-    Timer,
-    Ratio,
-    Probability
+    MetricRow
   },
 
   props: {
@@ -178,10 +171,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use 'sass:math';
 
+$base-spacing: 1rem;
+$border-radius: 0.5rem;
+$transition-duration: 0.3s;
+
 .trajectory-card {
-  $base-spacing: 1rem;
-  $border-radius: 0.5rem;
-  $transition-duration: 0.3s;
   
   background-color: white;
   border-radius: $border-radius;
