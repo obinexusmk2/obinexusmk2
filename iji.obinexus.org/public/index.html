@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IJI — Order Division | OBINexus Governance</title>
+  <meta name="description" content="IJI: The Order Division of OBINexus trident governance. Computational structure, RiftLang governance, and system coherence.">
+  <meta name="author" content="Nnamdi Michael Okpala">
+  <link rel="stylesheet" href="/shared/styles/governance.css">
+  <style>
+    .hero { border-left: 4px solid var(--iji-color); }
+    .division-badge {
+      display: inline-block;
+      padding: var(--space-xs) var(--space-md);
+      border: 1px solid var(--iji-color);
+      color: var(--iji-color);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: var(--space-lg);
+    }
+    .loop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(240, 236, 228, 0.06);
+      max-width: 1200px;
+      margin: var(--space-xl) auto;
+    }
+    .loop-cell {
+      background: var(--obi-black);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+    }
+    .loop-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-md);
+      color: var(--iji-color);
+    }
+    .gate-flow {
+      display: flex;
+      gap: var(--space-md);
+      max-width: 1200px;
+      margin: var(--space-xl) auto;
+      padding: 0 var(--space-lg);
+      overflow-x: auto;
+    }
+    .gate-card {
+      flex: 1;
+      min-width: 220px;
+      border: 1px solid rgba(240, 236, 228, 0.06);
+      padding: var(--space-lg);
+      position: relative;
+    }
+    .gate-card::after {
+      content: '\2192';
+      position: absolute;
+      right: -18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--iji-color);
+      font-size: 1.2rem;
+    }
+    .gate-card:last-child::after { content: ''; }
+    .gate-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--iji-color);
+      margin-bottom: var(--space-sm);
+    }
+    .evolution-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      max-width: 1200px;
+      margin: var(--space-xl) auto;
+      padding: 0 var(--space-lg);
+    }
+    .evo-card {
+      border: 1px solid rgba(240, 236, 228, 0.06);
+      padding: var(--space-lg);
+    }
+    .evo-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--iji-color);
+      margin-bottom: var(--space-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav-governance">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 200 280" fill="currentColor" style="width:28px;height:40px;color:var(--iji-color)">
+        <path d="M100 10 L70 50 L80 50 L100 30 L120 50 L130 50 Z"/>
+        <rect x="94" y="55" width="12" height="150" rx="2"/>
+        <path d="M94 130 L50 100 L45 108 L90 140"/>
+        <path d="M106 130 L150 100 L155 108 L110 140"/>
+        <path d="M100 205 L130 240 L120 240 L100 220 L80 240 L70 240 Z"/>
+      </svg>
+      IJI &middot; OBINexus
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/oha" data-division="oha">OHA</a></li>
+      <li><a href="/iwu" data-division="iwu">IWU</a></li>
+      <li><a href="/iji" data-division="iji" class="active">IJI</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero f-pattern">
+    <div class="f-row-full">
+      <span class="division-badge">Order Division</span>
+      <h1 class="hero-motto" style="color: var(--iji-color);">IJI</h1>
+      <h2 style="font-size: 1.8rem; margin-bottom: var(--space-md);">
+        Computational Order &amp; System Coherence
+      </h2>
+      <p style="color: var(--obi-muted); max-width: 600px; margin-bottom: var(--space-md);">
+        IJI means "order" in Igbo. This is the structural backbone of OBINexus —
+        the computational governance framework that ensures everything resolves to
+        coherence. RiftLang, LibPolyCall, and the automated judge-jury system.
+      </p>
+      <p style="color: var(--obi-muted); max-width: 600px; margin-bottom: var(--space-lg);">
+        Memory token, type token, value token. Compile-time safety via governance
+        supervision state. The system of judge, jury, and autonomous agent that
+        holds the pen and the sword in balance.
+      </p>
+      <a href="https://github.com/obinexus" class="cta-btn" style="border-color: var(--iji-color); color: var(--iji-color);">
+        Explore Architecture
+      </a>
+    </div>
+  </section>
+
+  <!-- Human Loop Model -->
+  <section class="section">
+    <p class="section-label" style="color: var(--iji-color);">Automation Model</p>
+    <h2 style="margin-bottom: var(--space-md);">Human Loop Architecture</h2>
+    <p style="color: var(--obi-muted); max-width: 600px; margin-bottom: var(--space-xl);">
+      Three modes of human-system interaction, rotating based on context and safety requirements.
+    </p>
+  </section>
+
+  <div class="loop-grid">
+    <div class="loop-cell">
+      <div class="loop-icon">&#x1F464;</div>
+      <h3 style="font-family: var(--font-heading); margin-bottom: var(--space-sm);">Human on the Loop</h3>
+      <p class="division-desc">The human is actively working. Direct engagement with the system. Hands on the controls, eyes on the outputs.</p>
+    </div>
+    <div class="loop-cell">
+      <div class="loop-icon">&#x1F465;</div>
+      <h3 style="font-family: var(--font-heading); margin-bottom: var(--space-sm);">Human in the Loop</h3>
+      <p class="division-desc">The human is being offered service via a schema. The system proposes, the human approves. Collaborative decision-making.</p>
+    </div>
+    <div class="loop-cell">
+      <div class="loop-icon">&#x1F916;</div>
+      <h3 style="font-family: var(--font-heading); margin-bottom: var(--space-sm);">Human out the Loop</h3>
+      <p class="division-desc">Fully autonomous agent. The system acts independently within its constitutional bounds. Like an automated judge with pre-defined coherence thresholds.</p>
+    </div>
+  </div>
+
+  <!-- Gating Pipeline -->
+  <section class="section">
+    <p class="section-label" style="color: var(--iji-color);">Gating Pipeline</p>
+    <h2 style="margin-bottom: var(--space-xl);">Computational Cognition for Real Teams</h2>
+  </section>
+
+  <div class="gate-flow">
+    <div class="gate-card">
+      <p class="gate-number">Gate 01</p>
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: var(--space-sm);">Open</h3>
+      <p class="division-desc" style="font-size: 0.85rem;">Ask better questions. Define inputs, contexts, constraints. What's the minimum signal we can safely measure?</p>
+    </div>
+    <div class="gate-card">
+      <p class="gate-number">Gate 02</p>
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: var(--space-sm);">Backlog</h3>
+      <p class="division-desc" style="font-size: 0.85rem;">Requirements, risks, reviews. Define one milestone, one proof, one witness. Red/blue collaboration.</p>
+    </div>
+    <div class="gate-card">
+      <p class="gate-number">Gate 03</p>
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: var(--space-sm);">Doing</h3>
+      <p class="division-desc" style="font-size: 0.85rem;">Unit, integration, system testing. Write tests that fail loudly when avatar limits are exceeded. Build with coherence.</p>
+    </div>
+    <div class="gate-card">
+      <p class="gate-number">Gate 04</p>
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: var(--space-sm);">Done</h3>
+      <p class="division-desc" style="font-size: 0.85rem;">Verified artifacts, linkable proofs, public witnesses. Publish and invite audit. 95.4% coherence threshold.</p>
+    </div>
+  </div>
+
+  <!-- SemVerX Evolution -->
+  <section class="section">
+    <p class="section-label" style="color: var(--iji-color);">SemVerX Evolution</p>
+    <h2 style="margin-bottom: var(--space-md);">Everything Must Evolve</h2>
+    <p style="color: var(--obi-muted); max-width: 600px; margin-bottom: var(--space-xl);">
+      Semantic Version Extended — the DAG evolution model. Major, minor, patch propagation
+      with LTS, stable, and experimental tracks. Hot-swap logic for governance state transitions.
+    </p>
+  </section>
+
+  <div class="evolution-grid">
+    <div class="evo-card">
+      <p class="evo-label">Major</p>
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: var(--space-sm);">Infrastructure as Service</h3>
+      <p class="division-desc" style="font-size: 0.85rem;">100% coherence required. The foundation that everything else builds on. Can hot-swap between stable, legacy, and experimental.</p>
+    </div>
+    <div class="evo-card">
+      <p class="evo-label">Minor</p>
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: var(--space-sm);">Business as Service</h3>
+      <p class="division-desc" style="font-size: 0.85rem;">Tier 2 alignment. The operational layer. Cross-track compatibility with major version constraints.</p>
+    </div>
+    <div class="evo-card">
+      <p class="evo-label">Patch</p>
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: var(--space-sm);">Hot Swap Logic</h3>
+      <p class="division-desc" style="font-size: 0.85rem;">Can cross anywhere. If a major version is a legacy or unstable build, move to LTS. LTS becomes stable, stable becomes legacy. Everything evolves.</p>
+    </div>
+  </div>
+
+  <!-- Persona: Eze (King) -->
+  <section class="section" style="margin-top: var(--space-2xl);">
+    <p class="section-label" style="color: var(--iji-color);">Governing Persona</p>
+    <h2 style="margin-bottom: var(--space-md);">Eze — King</h2>
+    <p style="color: var(--obi-muted); max-width: 600px;">
+      IJI is governed by the Eze persona — the king. Decisive in a flash. The second persona
+      who holds the power to make structural decisions. 95.4% coherence for every judgment.
+      The one with teeth — who can bite when needed. The automated judge with the authority
+      to write law into code and make it executable.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-governance">
+    <p>IJI &middot; Order Division &middot; OBINexus Governance &middot; Nnamdi Michael Okpala</p>
+    <p style="margin-top: var(--space-sm);">
+      <a href="/">Home</a> &middot;
+      <a href="/oha">OHA (Public)</a> &middot;
+      <a href="/iwu">IWU (Law)</a>
+    </p>
+  </footer>
+
+</body>
+</html>

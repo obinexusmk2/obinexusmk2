@@ -1,0 +1,9 @@
+{
+  "name": "@obinexus/oha",
+  "version": "1.0.0",
+  "description": "OHA — Public Division of OBINexus Governance",
+  "license": "Unlicense",
+  "scripts": {
+    "build": "echo 'OHA build complete'"
+  }
+}

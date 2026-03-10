@@ -1,0 +1,9 @@
+{
+  "name": "@obinexus/iwu",
+  "version": "1.0.0",
+  "description": "IWU — Law Division of OBINexus Governance",
+  "license": "Unlicense",
+  "scripts": {
+    "build": "echo 'IWU build complete'"
+  }
+}

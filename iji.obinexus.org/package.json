@@ -1,0 +1,9 @@
+{
+  "name": "@obinexus/iji",
+  "version": "1.0.0",
+  "description": "IJI — Order Division of OBINexus Governance",
+  "license": "Unlicense",
+  "scripts": {
+    "build": "echo 'IJI build complete'"
+  }
+}
