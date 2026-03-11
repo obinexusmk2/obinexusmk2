@@ -32,22 +32,41 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Create directory structure for _site
           rm -rf _site
-          mkdir -p _site/oha _site/iwu _site/iji _site/shared
+          mkdir -p _site/oha _site/iwu _site/iji _site/shared _site/assets
 
+          # Copy main index and assets
           cp obinexus.org/public/index.html _site/index.html
           cp oha.obinexus.org/public/index.html _site/oha/index.html
           cp iwu.obinexus.org/public/index.html _site/iwu/index.html
           cp iji.obinexus.org/public/index.html _site/iji/index.html
 
-          cp -R obinexus.org/public/assets _site/assets
-          cp -R shared/styles _site/shared/styles
+          # Copy all assets
+          if [ -d "obinexus.org/public/assets" ]; then
+            cp -R obinexus.org/public/assets/* _site/assets/
+          fi
 
+          if [ -d "shared/styles" ]; then
+            cp -R shared/styles _site/shared/
+          fi
+
+          # Create .nojekyll to disable Jekyll processing
           touch _site/.nojekyll
 
+          # Copy CNAME file if it exists
           if [ -f CNAME ]; then
             cp CNAME _site/CNAME
+            echo "CNAME file copied: $(cat CNAME)"
+          else
+            echo "WARNING: CNAME file not found in repository root!"
+            echo "Creating CNAME with obinexus.org"
+            echo "obinexus.org" > _site/CNAME
           fi
+
+          # Verify _site structure
+          echo "Generated site structure:"
+          find _site -type f | sort
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
