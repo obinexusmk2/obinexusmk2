@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="IJI — Order, Governance, Equity. The equity that evolves. OBINexus constitutional governance." />
+
+  <title>IJI — The Equity That Evolves · OBINexus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    :root { --pillar-accent: #FF7B7B; --pillar-dim: rgba(255,123,123,0.1); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 70%,
+        rgba(143,42,42,0.15) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Rotating wheel */
+    .ob-wheel-container {
+      display: flex;
+      justify-content: center;
+      margin: var(--space-2xl) 0;
+      position: relative;
+    }
+
+    .ob-wheel {
+      position: relative;
+      width: min(480px, 90vw);
+      height: min(480px, 90vw);
+    }
+
+    .ob-wheel__svg {
+      width: 100%;
+      height: 100%;
+      animation: ob-spin-slow 30s linear infinite;
+    }
+
+    @keyframes ob-spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .ob-wheel__center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .ob-wheel__axiom {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      color: var(--ob-gold);
+      line-height: 1.5;
+      max-width: 160px;
+    }
+
+    /* Equity cycle */
+    .ob-equity-cycle {
+      display: flex;
+      gap: var(--space-xl);
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+
+    .ob-equity-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .ob-equity-node__circle {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      border: 2px solid var(--pillar-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,123,123,0.05);
+      font-family: var(--font-sovereign);
+      font-size: 1rem;
+      color: var(--pillar-accent);
+      letter-spacing: 0.05em;
+      transition: var(--transition-base);
+    }
+
+    .ob-equity-node__circle:hover {
+      background: rgba(255,123,123,0.12);
+      box-shadow: 0 0 30px rgba(255,123,123,0.2);
+    }
+
+    .ob-equity-node__label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ob-text-muted);
+    }
+
+    .ob-equity-arrow {
+      color: rgba(255,123,123,0.3);
+      font-size: 1.8rem;
+      animation: ob-breathe 3s ease-in-out infinite;
+    }
+
+    /* IJI milestones table */
+    .ob-milestones {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--space-xl);
+    }
+
+    .ob-milestones th {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pillar-accent);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,123,123,0.15);
+    }
+
+    .ob-milestones td {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--ob-text-muted);
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .ob-milestones td:first-child {
+      font-family: var(--font-display);
+      color: var(--ob-text);
+      white-space: nowrap;
+      width: 100px;
+    }
+
+    .ob-milestones td:nth-child(2) {
+      font-family: var(--font-display);
+      color: var(--ob-gold);
+    }
+
+    .ob-milestones tr:hover td {
+      background: rgba(255,123,123,0.03);
+    }
+
+    .ob-heal-cycle {
+      background: linear-gradient(135deg, rgba(143,42,42,0.15), rgba(10,10,15,0.6));
+      border: 1px solid rgba(255,123,123,0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-xl);
+      text-align: center;
+    }
+
+    .ob-heal-flow {
+      display: flex;
+      gap: var(--space-md);
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: var(--space-lg) 0;
+    }
+
+    .ob-heal-word {
+      font-family: var(--font-sovereign);
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      color: var(--ob-butterfly);
+    }
+
+    .ob-heal-arrow { color: rgba(255,107,53,0.35); font-size: 1.4rem; }
+  </style>
+</head>
+
+<body>
+  <canvas id="ob-canvas-bg" aria-hidden="true"></canvas>
+
+  <!-- NAV -->
+  <nav class="ob-nav" role="navigation" aria-label="OBINexus main navigation">
+    <a class="ob-nav__wordmark" href="index.html">OBINexus</a>
+    <ul class="ob-nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#sdk">SDK</a></li>
+      <li><a href="index.html#history">History</a></li>
+    </ul>
+    <div class="ob-nav__pillar-links">
+      <a class="oha" href="oha.html">OHA</a>
+      <a class="iwu" href="iwu.html">IWU</a>
+      <a class="iji active" href="iji.html" aria-current="page">IJI</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="ob-pillar-hero ob-pillar-hero--iji" aria-labelledby="iji-title">
+      <span class="ob-pillar-hero__bg-text" aria-hidden="true">IJI</span>
+      <div class="ob-container">
+        <p class="ob-pillar-hero__roman">Pillar III — Order, Governance, Equity</p>
+        <h1 class="ob-pillar-hero__title ob-glow" id="iji-title">IJI</h1>
+        <p class="ob-pillar-hero__tagline ob-pillar-hero--iji">
+          "The equity that evolves"
+        </p>
+        <div style="margin-top:var(--space-lg);">
+          <span style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.2em;
+                       color:rgba(255,123,123,0.6);text-transform:uppercase;">
+            Subdomain: iji.obinexus.org
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHAT IS IJI ── -->
+    <section class="ob-section" aria-labelledby="iji-what">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Constitutional Definition</p>
+        <h2 class="ob-section__title" id="iji-what" style="color:#FF7B7B;">
+          What is IJI?
+        </h2>
+
+        <p style="font-family:var(--font-body);font-size:1.05rem;color:var(--ob-text);
+                  line-height:1.9;max-width:720px;">
+          IJI establishes the <strong>operational order</strong> of OBINexus. It is governance
+          that rotates, breathes, and transforms — ensuring equity is not a destination
+          but a continuous process. IJI is where the constitution becomes lived reality:
+          the day-to-day governance that connects OHA's protection to IWU's law.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── THREE PRINCIPLES ── -->
+    <section class="ob-section" aria-labelledby="iji-principles">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Core Principles</p>
+        <h2 class="ob-section__title" id="iji-principles" style="color:#FF7B7B;">
+          The IJI Mandate
+        </h2>
+
+        <div class="ob-principles">
+          <div class="ob-principle ob-principle--iji ob-reveal">
+            <span class="ob-principle__number">I</span>
+            <p class="ob-principle__title">Governance Rotates to Prevent Stagnation</p>
+            <p class="ob-principle__body">
+              No single model of governance can hold for all times and all people.
+              IJI mandates rotation: of leadership models, of policy approaches, of
+              frameworks — so that the system remains alive and responsive.
+            </p>
+          </div>
+          <div class="ob-principle ob-principle--iji ob-reveal">
+            <span class="ob-principle__number">II</span>
+            <p class="ob-principle__title">Equity is Measured in Breath, Not Benchmarks</p>
+            <p class="ob-principle__body">
+              Metrics do not measure dignity. IJI insists that equity must be felt —
+              in sensory safety, in cognitive room, in the freedom to breathe without
+              performance. Numbers are only proxies for lived experience.
+            </p>
+          </div>
+          <div class="ob-principle ob-principle--iji ob-reveal">
+            <span class="ob-principle__number">III</span>
+            <p class="ob-principle__title">Order Serves Life, Life Does Not Serve Order</p>
+            <p class="ob-principle__body">
+              The purpose of order is to protect and enable life — not to subordinate
+              life to procedural demands. Any governance structure that demands
+              that people diminish themselves to fit it is operating in inversion.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ── THE WHEEL ── -->
+    <section class="ob-section" aria-labelledby="iji-wheel">
+      <div class="ob-container">
+        <div class="ob-reveal" style="text-align:center;">
+          <p class="ob-section__label">The Wheel Model</p>
+          <h2 class="ob-section__title" id="iji-wheel" style="color:#FF7B7B;">
+            "You are perfect. The roads are broken."
+          </h2>
+          <p class="ob-section__subtitle" style="margin:0 auto;">
+            The Wheel Model proves that failure is not personal — it is infrastructural.
+            IJI is the pillar that builds new roads.
+          </p>
+        </div>
+
+        <!-- Animated SVG wheel -->
+        <div class="ob-wheel-container ob-reveal" aria-label="The 8 Spokes of the Wheel" role="img">
+          <div class="ob-wheel">
+            <svg class="ob-wheel__svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true">
+              <!-- Hub -->
+              <circle cx="200" cy="200" r="28" fill="rgba(255,123,123,0.1)"
+                      stroke="#FF7B7B" stroke-width="1.5" />
+              <!-- Rim -->
+              <circle cx="200" cy="200" r="170" fill="none"
+                      stroke="rgba(255,123,123,0.15)" stroke-width="1" stroke-dasharray="4 8" />
+              <circle cx="200" cy="200" r="150" fill="none"
+                      stroke="rgba(255,215,0,0.08)" stroke-width="0.5" />
+
+              <!-- 8 Spokes with labels -->
+              <g stroke="rgba(255,123,123,0.25)" stroke-width="1">
+                <line x1="200" y1="172" x2="200" y2="30" />
+                <line x1="200" y1="228" x2="200" y2="370" />
+                <line x1="172" y1="200" x2="30" y2="200" />
+                <line x1="228" y1="200" x2="370" y2="200" />
+                <line x1="180" y1="180" x2="75" y2="75" />
+                <line x1="220" y1="220" x2="325" y2="325" />
+                <line x1="220" y1="180" x2="325" y2="75" />
+                <line x1="180" y1="220" x2="75" y2="325" />
+              </g>
+
+              <!-- Spoke labels -->
+              <g font-family="'Cinzel', serif" font-size="11" fill="rgba(255,215,0,0.7)"
+                 text-anchor="middle">
+                <text x="200" y="18">AURA</text>
+                <text x="200" y="390">LEGACY</text>
+                <text x="18" y="204">LEGAL</text>
+                <text x="382" y="204">INFRA</text>
+                <text x="54" y="62">RHETORIC</text>
+                <text x="346" y="344">FINANCE</text>
+                <text x="348" y="62">PHENO</text>
+                <text x="52" y="344">CONST.</text>
+              </g>
+
+              <!-- Outer rim nodes -->
+              <g fill="rgba(255,123,123,0.4)">
+                <circle cx="200" cy="30"  r="5" />
+                <circle cx="200" cy="370" r="5" />
+                <circle cx="30"  cy="200" r="5" />
+                <circle cx="370" cy="200" r="5" />
+                <circle cx="76"  cy="76"  r="5" />
+                <circle cx="324" cy="324" r="5" />
+                <circle cx="324" cy="76"  r="5" />
+                <circle cx="76"  cy="324" r="5" />
+              </g>
+            </svg>
+
+            <div class="ob-wheel__center">
+              <p class="ob-wheel__axiom">You are<br/>perfect.<br/>The roads<br/>are broken.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wheel milestone table -->
+        <div class="ob-reveal">
+          <p class="ob-section__label" style="margin-bottom:var(--space-sm);">Age-Based Milestones</p>
+          <div style="overflow-x:auto;">
+            <table class="ob-milestones" aria-label="Wheel development milestones">
+              <thead>
+                <tr>
+                  <th>Age</th>
+                  <th>Milestone</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0–12</td>
+                  <td>Discover Self</td>
+                  <td>No work. Only play. The wheel begins perfectly round.</td>
+                </tr>
+                <tr>
+                  <td>13–18</td>
+                  <td>Build First Prototype</td>
+                  <td>Water system, podium. Begin making the roads.</td>
+                </tr>
+                <tr>
+                  <td>18–24</td>
+                  <td>Transcend System</td>
+                  <td>Sue the institutions. Build the PhD. Document on YouTube.</td>
+                </tr>
+                <tr>
+                  <td>24–28</td>
+                  <td>Launch IGA</td>
+                  <td>Nigeria + Cambridge. Independent Governance Area established.</td>
+                </tr>
+                <tr>
+                  <td>28–32</td>
+                  <td>Global Holiday</td>
+                  <td>Japan (6 months). Rest as constitutional right.</td>
+                </tr>
+                <tr>
+                  <td>32–40</td>
+                  <td>Build Utopia</td>
+                  <td>Artificial islands, space-bound infrastructure.</td>
+                </tr>
+                <tr>
+                  <td>40+</td>
+                  <td>Marry Authentically</td>
+                  <td>Polygamy, children (optional). Sovereign family architecture.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ── EQUITY CYCLE ── -->
+    <section class="ob-section" aria-labelledby="iji-equity">
+      <div class="ob-container ob-reveal" style="text-align:center;">
+        <p class="ob-section__label">Operational Governance</p>
+        <h2 class="ob-section__title" id="iji-equity" style="color:#FF7B7B;">
+          The Equity Cycle
+        </h2>
+        <p class="ob-section__subtitle" style="margin:0 auto var(--space-xl);">
+          IJI governance rotates continuously across three operational modes.
+          No single mode dominates — rotation prevents stagnation.
+        </p>
+
+        <div class="ob-equity-cycle">
+          <div class="ob-equity-node">
+            <div class="ob-equity-node__circle ob-breathe">OHA</div>
+            <span class="ob-equity-node__label">Protect</span>
+          </div>
+          <span class="ob-equity-arrow" aria-hidden="true">→</span>
+          <div class="ob-equity-node">
+            <div class="ob-equity-node__circle ob-breathe" style="animation-delay:1s;">IWU</div>
+            <span class="ob-equity-node__label">Legislate</span>
+          </div>
+          <span class="ob-equity-arrow" aria-hidden="true">→</span>
+          <div class="ob-equity-node">
+            <div class="ob-equity-node__circle ob-breathe" style="animation-delay:2s;">IJI</div>
+            <span class="ob-equity-node__label">Execute</span>
+          </div>
+          <span class="ob-equity-arrow" aria-hidden="true">↺</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── THE CYCLE OF HEALING ── -->
+    <section class="ob-section" aria-labelledby="iji-heal">
+      <div class="ob-container ob-reveal">
+        <div class="ob-heal-cycle">
+          <p class="ob-section__label">The Constitutional Cycle of Healing</p>
+          <h2 style="font-family:var(--font-sovereign);font-size:1.5rem;color:var(--ob-gold);
+                     margin-bottom:var(--space-lg);" id="iji-heal">
+            Tears → Sweat → Blood
+          </h2>
+
+          <div class="ob-heal-flow">
+            <span class="ob-heal-word">TEARS</span>
+            <span class="ob-heal-arrow">→</span>
+            <span class="ob-heal-word">SWEAT</span>
+            <span class="ob-heal-arrow">→</span>
+            <span class="ob-heal-word">BLOOD</span>
+            <span class="ob-heal-arrow">↺</span>
+          </div>
+
+          <p style="font-family:var(--font-body);font-style:italic;font-size:1rem;
+                    color:var(--ob-text-muted);line-height:2;max-width:520px;margin:0 auto;">
+            I heal myself.<br/>
+            I heal the future.<br/>
+            I heal the constitution.<br/><br/>
+            <span style="color:var(--ob-butterfly);font-style:normal;">
+              My dystopia becomes our utopia —<br/>
+              through breath, ontology, and constitutional engineering.
+            </span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BACK NAV ── -->
+    <section class="ob-section" style="padding-top:0;">
+      <div class="ob-container" style="display:flex;gap:var(--space-md);flex-wrap:wrap;">
+        <a class="ob-btn ob-btn--tertiary" href="iwu.html">← Back to IWU</a>
+        <a class="ob-btn ob-btn--primary" href="index.html">Return Home</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="ob-footer">
+    <div class="ob-container">
+      <span class="ob-footer__wordmark">OBINexus · IJI</span>
+      <p class="ob-footer__declaration">
+        The equity that evolves.<br/>
+        <strong>Order serves life. Life does not serve order.</strong><br/><br/>
+        <em>My wheel moves on. Does yours?</em>
+      </p>
+      <p class="ob-footer__copy">
+        © 2026 Nnamdi Michael Okpala · @obinexusltd/obix v0.1.x
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/parallax.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

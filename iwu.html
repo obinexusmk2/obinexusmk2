@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="IWU — Law and Policy. The law that learns. OBINexus adaptive constitutional governance." />
+
+  <title>IWU — The Law That Learns · OBINexus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    :root { --pillar-accent: #7B9FFF; --pillar-dim: rgba(123,159,255,0.1); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 75% 25%,
+        rgba(42,63,143,0.18) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ob-policy-timeline {
+      position: relative;
+      max-width: 720px;
+      margin-top: var(--space-xl);
+    }
+
+    .ob-policy-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        var(--pillar-accent), transparent);
+      opacity: 0.3;
+    }
+
+    .ob-policy-item {
+      padding: var(--space-md) 0 var(--space-lg) var(--space-xl);
+      position: relative;
+    }
+
+    .ob-policy-item::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 1.2rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--pillar-accent);
+      box-shadow: 0 0 12px rgba(123,159,255,0.6);
+    }
+
+    .ob-policy-item__tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pillar-accent);
+      margin-bottom: 4px;
+    }
+
+    .ob-policy-item__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--ob-text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .ob-policy-item__body {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--ob-text-muted);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .ob-law-matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+
+    @media (max-width: 600px) { .ob-law-matrix { grid-template-columns: 1fr; } }
+
+    .ob-law-cell {
+      background: var(--ob-soil-surface);
+      border: 1px solid rgba(123,159,255,0.1);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      transition: border-color 250ms;
+    }
+    .ob-law-cell:hover { border-color: rgba(123,159,255,0.35); }
+
+    .ob-law-cell__from {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: rgba(123,159,255,0.5);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+
+    .ob-law-cell__to {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--pillar-accent);
+      margin-bottom: var(--space-xs);
+    }
+
+    .ob-law-cell__desc {
+      font-size: 0.8rem;
+      color: var(--ob-text-muted);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .ob-living-doc {
+      background: linear-gradient(135deg, rgba(42,63,143,0.15), rgba(10,10,15,0.6));
+      border: 1px solid rgba(123,159,255,0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+
+    .ob-living-doc__code {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--ob-cyan);
+      line-height: 2;
+      background: rgba(0,0,0,0.3);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin-top: var(--space-md);
+      overflow-x: auto;
+    }
+
+    .ob-living-doc__comment { color: rgba(160,160,176,0.4); }
+    .ob-living-doc__key { color: #7B9FFF; }
+    .ob-living-doc__val { color: #4ECCA3; }
+    .ob-living-doc__str { color: #FFD700; }
+  </style>
+</head>
+
+<body>
+  <canvas id="ob-canvas-bg" aria-hidden="true"></canvas>
+
+  <!-- NAV -->
+  <nav class="ob-nav" role="navigation" aria-label="OBINexus main navigation">
+    <a class="ob-nav__wordmark" href="index.html">OBINexus</a>
+    <ul class="ob-nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#sdk">SDK</a></li>
+      <li><a href="index.html#history">History</a></li>
+    </ul>
+    <div class="ob-nav__pillar-links">
+      <a class="oha" href="oha.html">OHA</a>
+      <a class="iwu active" href="iwu.html" aria-current="page">IWU</a>
+      <a class="iji" href="iji.html">IJI</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="ob-pillar-hero ob-pillar-hero--iwu" aria-labelledby="iwu-title">
+      <span class="ob-pillar-hero__bg-text" aria-hidden="true">IWU</span>
+      <div class="ob-container">
+        <p class="ob-pillar-hero__roman">Pillar II — Law and Policy</p>
+        <h1 class="ob-pillar-hero__title ob-glow" id="iwu-title">IWU</h1>
+        <p class="ob-pillar-hero__tagline ob-pillar-hero--iwu">
+          "The law that learns"
+        </p>
+        <div style="margin-top:var(--space-lg);">
+          <span style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.2em;
+                       color:rgba(123,159,255,0.6);text-transform:uppercase;">
+            Subdomain: iwu.obinexus.org
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHAT IS IWU ── -->
+    <section class="ob-section" aria-labelledby="iwu-what">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Constitutional Definition</p>
+        <h2 class="ob-section__title" id="iwu-what" style="color:#7B9FFF;">
+          What is IWU?
+        </h2>
+
+        <p style="font-family:var(--font-body);font-size:1.05rem;color:var(--ob-text);
+                  line-height:1.9;max-width:720px;">
+          IWU is the <strong>adaptive legal framework</strong> of OBINexus. It is law designed
+          by the neurodivergent, for the neurodivergent — breaking from rigid bureaucratic
+          structures to embrace fluid, ontology-based governance. IWU does not demand
+          that people conform to law. It demands that law conform to people.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── THREE PRINCIPLES ── -->
+    <section class="ob-section" aria-labelledby="iwu-principles">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Core Principles</p>
+        <h2 class="ob-section__title" id="iwu-principles" style="color:#7B9FFF;">
+          The IWU Doctrine
+        </h2>
+
+        <div class="ob-principles">
+          <div class="ob-principle ob-principle--iwu ob-reveal">
+            <span class="ob-principle__number">I</span>
+            <p class="ob-principle__title">Law Adapts to Cognition</p>
+            <p class="ob-principle__body">
+              The legal system must flex to accommodate neurodivergent cognition patterns.
+              Rigid procedural requirements that exclude people with atypical processing
+              are unconstitutional under IWU.
+            </p>
+          </div>
+          <div class="ob-principle ob-principle--iwu ob-reveal">
+            <span class="ob-principle__number">II</span>
+            <p class="ob-principle__title">Policy is Living Documentation</p>
+            <p class="ob-principle__body">
+              No policy is final. Every OBINexus policy document carries a version number,
+              a changelog, and a review cycle. Law that cannot update cannot serve life.
+              IWU treats governance as software: it ships, it iterates, it improves.
+            </p>
+          </div>
+          <div class="ob-principle ob-principle--iwu ob-reveal">
+            <span class="ob-principle__number">III</span>
+            <p class="ob-principle__title">Compliance Through Coherence</p>
+            <p class="ob-principle__body">
+              Coercion creates resistance. IWU achieves compliance by making it rational —
+              by designing systems so coherent, so fair, so legible that following them is
+              the natural path. Compliance is never demanded; it is designed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ── THE TRANSFORMATION MATRIX ── -->
+    <section class="ob-section" aria-labelledby="iwu-transform">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Constitutional Transformation</p>
+        <h2 class="ob-section__title" id="iwu-transform" style="color:#7B9FFF;">
+          From Broken Law to Living Law
+        </h2>
+        <p class="ob-section__subtitle">
+          IWU maps the gap between how law currently operates and how it must operate
+          for neurodivergent-first constitutional governance to function.
+        </p>
+
+        <div class="ob-law-matrix">
+          <div class="ob-law-cell ob-reveal">
+            <p class="ob-law-cell__from">Rigid Procedure</p>
+            <p class="ob-law-cell__to">Adaptive Protocol</p>
+            <p class="ob-law-cell__desc">Fixed procedural steps replaced by outcomes-based protocols that accommodate different cognitive and communication styles.</p>
+          </div>
+          <div class="ob-law-cell ob-reveal">
+            <p class="ob-law-cell__from">Static Policy</p>
+            <p class="ob-law-cell__to">Living Documentation</p>
+            <p class="ob-law-cell__desc">Policy documents are versioned, dated, and subject to regular review. Every change is logged. No policy is hidden from the people it governs.</p>
+          </div>
+          <div class="ob-law-cell ob-reveal">
+            <p class="ob-law-cell__from">Compliance by Force</p>
+            <p class="ob-law-cell__to">Coherence by Design</p>
+            <p class="ob-law-cell__desc">Systems designed so clearly and equitably that following them is the path of least resistance. Coercion is an admission of design failure.</p>
+          </div>
+          <div class="ob-law-cell ob-reveal">
+            <p class="ob-law-cell__from">Deficit Model</p>
+            <p class="ob-law-cell__to">Infrastructure Model</p>
+            <p class="ob-law-cell__desc">Neurodivergence is not a deficit to be managed. The roads are broken. IWU builds new roads — legal infrastructure that enables full participation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LIVING POLICY AS CODE ── -->
+    <section class="ob-section" aria-labelledby="iwu-code">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Policy Infrastructure</p>
+        <h2 class="ob-section__title" id="iwu-code" style="color:#7B9FFF;">
+          Policy as Living Code
+        </h2>
+
+        <div class="ob-living-doc ob-reveal">
+          <p style="font-family:var(--font-display);font-size:0.9rem;
+                    letter-spacing:0.1em;color:#7B9FFF;margin-bottom:var(--space-sm);">
+            IWU Constitutional Policy Format — v1.0.0
+          </p>
+          <p style="font-family:var(--font-body);font-style:italic;font-size:0.85rem;
+                    color:var(--ob-text-muted);margin-bottom:var(--space-md);">
+            Every OBINexus policy document follows this structure:
+          </p>
+          <pre class="ob-living-doc__code"><span class="ob-living-doc__comment">// IWU Policy Document — Living Format</span>
+{
+  <span class="ob-living-doc__key">"policy_id"</span>:     <span class="ob-living-doc__str">"IWU-2026-001"</span>,
+  <span class="ob-living-doc__key">"version"</span>:       <span class="ob-living-doc__str">"1.0.0-phase1"</span>,
+  <span class="ob-living-doc__key">"status"</span>:        <span class="ob-living-doc__val">ACTIVE</span>,
+  <span class="ob-living-doc__key">"created"</span>:       <span class="ob-living-doc__str">"2026-03-28"</span>,
+  <span class="ob-living-doc__key">"review_cycle"</span>:  <span class="ob-living-doc__str">"quarterly"</span>,
+  <span class="ob-living-doc__key">"applies_to"</span>:    <span class="ob-living-doc__str">"all_neurodivergent_persons"</span>,
+  <span class="ob-living-doc__key">"compliance"</span>:    <span class="ob-living-doc__str">"coherence_not_coercion"</span>,
+  <span class="ob-living-doc__key">"overrides"</span>:     [],
+  <span class="ob-living-doc__key">"changelog"</span>: [
+    {
+      <span class="ob-living-doc__key">"date"</span>: <span class="ob-living-doc__str">"2026-03-28"</span>,
+      <span class="ob-living-doc__key">"change"</span>: <span class="ob-living-doc__str">"Initial constitutional encoding"</span>,
+      <span class="ob-living-doc__key">"author"</span>: <span class="ob-living-doc__str">"Nnamdi Michael Okpala"</span>
+    }
+  ]
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── POLICY TIMELINE ── -->
+    <section class="ob-section" aria-labelledby="iwu-timeline">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Legislative History</p>
+        <h2 class="ob-section__title" id="iwu-timeline" style="color:#7B9FFF;">
+          IWU Policy Timeline
+        </h2>
+
+        <div class="ob-policy-timeline">
+          <div class="ob-policy-item ob-reveal">
+            <p class="ob-policy-item__tag">Section 204 — 2026</p>
+            <p class="ob-policy-item__title">Constitutional Autonomy Declaration</p>
+            <p class="ob-policy-item__body">The IWU gateway for self-sovereign constitutional status. Used to establish independent governance areas and resist institutional over-reach.</p>
+          </div>
+          <div class="ob-policy-item ob-reveal">
+            <p class="ob-policy-item__tag">Equality Act 2010</p>
+            <p class="ob-policy-item__title">Protected Characteristics Framework</p>
+            <p class="ob-policy-item__body">Neurodivergence encoded as protected characteristic. Reasonable adjustments are mandatory, not discretionary. IWU enforces this at the constitutional level.</p>
+          </div>
+          <div class="ob-policy-item ob-reveal">
+            <p class="ob-policy-item__tag">UN CRPD — 2006</p>
+            <p class="ob-policy-item__title">Convention on Rights of Persons with Disabilities</p>
+            <p class="ob-policy-item__body">Article 12 (equal recognition before law), Article 19 (independent living), and Article 21 (freedom of expression) form the IWU international framework.</p>
+          </div>
+          <div class="ob-policy-item ob-reveal">
+            <p class="ob-policy-item__tag">OBINexus Constitutional — 2025</p>
+            <p class="ob-policy-item__title">Biafran Oha-Iwu-Ija Constitutional Framework</p>
+            <p class="ob-policy-item__body">The sovereign constitutional basis of OBINexus. Supersedes corporate policy where constitutional rights are in conflict. Living documentation, version-controlled.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BACK NAV ── -->
+    <section class="ob-section" style="padding-top:0;">
+      <div class="ob-container" style="display:flex;gap:var(--space-md);flex-wrap:wrap;">
+        <a class="ob-btn ob-btn--tertiary" href="oha.html">← Back to OHA</a>
+        <a class="ob-btn ob-btn--secondary" href="iji.html">Enter IJI →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="ob-footer">
+    <div class="ob-container">
+      <span class="ob-footer__wordmark">OBINexus · IWU</span>
+      <p class="ob-footer__declaration">
+        The law that learns.<br/>
+        <strong>Compliance through coherence, not coercion.</strong>
+      </p>
+      <p class="ob-footer__copy">
+        © 2026 Nnamdi Michael Okpala · @obinexusltd/obix v0.1.x
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/parallax.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

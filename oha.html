@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="OHA — Public Protection. The shield that breathes. OBINexus constitutional governance." />
+
+  <title>OHA — The Shield That Breathes · OBINexus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    :root { --pillar-accent: #4ECCA3; --pillar-dim: rgba(78,204,163,0.1); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 30%,
+        rgba(26,107,90,0.18) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ob-pillar-accent { color: var(--pillar-accent); }
+
+    .ob-rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .ob-rights-card {
+      background: var(--ob-soil-surface);
+      border: 1px solid rgba(78,204,163,0.12);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      transition: border-color 250ms;
+    }
+    .ob-rights-card:hover { border-color: rgba(78,204,163,0.35); }
+
+    .ob-rights-card__act {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pillar-accent);
+      margin-bottom: var(--space-sm);
+    }
+
+    .ob-rights-card__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--ob-text);
+      margin-bottom: var(--space-sm);
+      line-height: 1.4;
+    }
+
+    .ob-rights-card__desc {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--ob-text-muted);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .ob-4ds {
+      background: linear-gradient(135deg, rgba(26,107,90,0.15), rgba(10,10,15,0.6));
+      border: 1px solid rgba(78,204,163,0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+
+    .ob-4ds__flow {
+      display: flex;
+      gap: var(--space-md);
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-lg);
+    }
+
+    .ob-4ds__step {
+      font-family: var(--font-sovereign);
+      font-size: 1.1rem;
+      color: var(--ob-butterfly);
+      letter-spacing: 0.1em;
+    }
+
+    .ob-4ds__arrow {
+      color: rgba(255,107,53,0.4);
+      font-size: 1.2rem;
+    }
+
+    .ob-4ds__response {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: var(--pillar-accent);
+      margin-top: var(--space-sm);
+    }
+
+    .ob-guarantee-box {
+      background: rgba(78,204,163,0.06);
+      border-left: 3px solid var(--pillar-accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-lg) var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+
+    .ob-guarantee-box p {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ob-text-muted);
+      line-height: 1.9;
+    }
+
+    .ob-guarantee-box strong {
+      color: var(--pillar-accent);
+      font-style: normal;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="ob-canvas-bg" aria-hidden="true"></canvas>
+
+  <!-- NAV -->
+  <nav class="ob-nav" role="navigation" aria-label="OBINexus main navigation">
+    <a class="ob-nav__wordmark" href="index.html">OBINexus</a>
+    <ul class="ob-nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#sdk">SDK</a></li>
+      <li><a href="index.html#history">History</a></li>
+    </ul>
+    <div class="ob-nav__pillar-links">
+      <a class="oha active" href="oha.html" aria-current="page">OHA</a>
+      <a class="iwu" href="iwu.html">IWU</a>
+      <a class="iji" href="iji.html">IJI</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="ob-pillar-hero ob-pillar-hero--oha" aria-labelledby="oha-title">
+      <span class="ob-pillar-hero__bg-text" aria-hidden="true">OHA</span>
+      <div class="ob-container">
+        <p class="ob-pillar-hero__roman">Pillar I — Public Protection</p>
+        <h1 class="ob-pillar-hero__title ob-glow" id="oha-title">OHA</h1>
+        <p class="ob-pillar-hero__tagline ob-pillar-hero--oha">
+          "The shield that breathes"
+        </p>
+        <div style="margin-top:var(--space-lg);">
+          <span style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.2em;
+                       color:rgba(78,204,163,0.6);text-transform:uppercase;">
+            Subdomain: oha.obinexus.org
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHAT IS OHA ── -->
+    <section class="ob-section" aria-labelledby="oha-what">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Constitutional Definition</p>
+        <h2 class="ob-section__title" id="oha-what" style="color:#4ECCA3;">
+          What is OHA?
+        </h2>
+
+        <p style="font-family:var(--font-body);font-size:1.05rem;color:var(--ob-text);
+                  line-height:1.9;max-width:720px;margin-bottom:var(--space-lg);">
+          OHA represents the <strong>public protection layer</strong> of OBINexus governance.
+          It is the constitutional guarantee that breathing rights are protected
+          before any other consideration. OHA is the first gate: without it,
+          IWU and IJI cannot function.
+        </p>
+
+        <div class="ob-guarantee-box">
+          <p>
+            <strong>The OHA Guarantee:</strong><br/>
+            Every human being — neurodivergent or neurotypical — enters the OBINexus
+            constitutional framework under the protection of OHA. No system, institution,
+            or authority may breach these protections. <strong>Protection precedes production.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── THREE PRINCIPLES ── -->
+    <section class="ob-section" aria-labelledby="oha-principles">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Core Principles</p>
+        <h2 class="ob-section__title" id="oha-principles" style="color:#4ECCA3;">
+          The OHA Covenant
+        </h2>
+
+        <div class="ob-principles">
+          <div class="ob-principle ob-principle--oha ob-reveal">
+            <span class="ob-principle__number">I</span>
+            <p class="ob-principle__title">Breathing Rights are Non-Negotiable</p>
+            <p class="ob-principle__body">
+              The right to breathe — physically, cognitively, sensorially — cannot be
+              traded, suspended, or conditioned. It precedes all legal frameworks.
+              OHA encodes this as the zeroth law of OBINexus governance.
+            </p>
+          </div>
+          <div class="ob-principle ob-principle--oha ob-reveal">
+            <span class="ob-principle__number">II</span>
+            <p class="ob-principle__title">Public Infrastructure Serves the Neurodivergent First</p>
+            <p class="ob-principle__body">
+              When infrastructure is designed for the most excluded, it works for everyone.
+              OHA mandates that all OBINexus public systems are built neurodivergent-first —
+              from sensory accessibility to cognitive load management.
+            </p>
+          </div>
+          <div class="ob-principle ob-principle--oha ob-reveal">
+            <span class="ob-principle__number">III</span>
+            <p class="ob-principle__title">Protection Precedes Production</p>
+            <p class="ob-principle__body">
+              No economic, political, or operational priority overrides the OHA guarantee.
+              Before any system produces output, it must first establish that the people
+              within it are constitutionally protected.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ── RIGHTS FRAMEWORK ── -->
+    <section class="ob-section" aria-labelledby="oha-rights">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Legal Infrastructure</p>
+        <h2 class="ob-section__title" id="oha-rights" style="color:#4ECCA3;">
+          Human Rights Defense Framework
+        </h2>
+        <p class="ob-section__subtitle">
+          OHA maps to existing UK, UN, and Biafran legal frameworks.
+          Constitutional mathematics establishes value for each violation.
+        </p>
+
+        <div class="ob-rights-grid">
+          <div class="ob-rights-card ob-reveal">
+            <p class="ob-rights-card__act">Housing Act 1996</p>
+            <p class="ob-rights-card__title">Section 184 — Independent Housing Rights</p>
+            <p class="ob-rights-card__desc">Right to independent assessment of housing need. Section 184 Appeals preserve the neurodivergent person's right to adequate, accessible shelter.</p>
+          </div>
+          <div class="ob-rights-card ob-reveal">
+            <p class="ob-rights-card__act">Human Rights Act 1998</p>
+            <p class="ob-rights-card__title">Article 8 — Right to Private and Family Life</p>
+            <p class="ob-rights-card__desc">No public authority shall interfere with the exercise of this right except as permitted by law. Includes the right to cognitive and sensory autonomy.</p>
+          </div>
+          <div class="ob-rights-card ob-reveal">
+            <p class="ob-rights-card__act">Mental Health Act 1983</p>
+            <p class="ob-rights-card__title">Section 117 — After-Care Entitlements</p>
+            <p class="ob-rights-card__desc">Indefinite after-care covering housing support at no cost. Section 115(1)-(2) entry rights for approved mental health professionals.</p>
+          </div>
+          <div class="ob-rights-card ob-reveal">
+            <p class="ob-rights-card__act">Children Act 1989</p>
+            <p class="ob-rights-card__title">Section 21 — Duty to Accommodate</p>
+            <p class="ob-rights-card__desc">Local authority duty to provide accommodation to persons in need. Care leavers aged 18–25 retain protections under Health and Social Care Act 2014.</p>
+          </div>
+        </div>
+
+        <!-- 4 D's of Bureaucratic Resistance -->
+        <div class="ob-4ds ob-reveal">
+          <p style="font-family:var(--font-display);font-size:0.72rem;letter-spacing:0.3em;
+                    color:rgba(78,204,163,0.6);text-transform:uppercase;margin-bottom:var(--space-md);">
+            Pattern Recognition
+          </p>
+          <h3 style="font-family:var(--font-sovereign);font-size:1.3rem;color:var(--ob-gold);
+                     margin-bottom:var(--space-lg);">
+            The 4 D's of Bureaucratic Resistance
+          </h3>
+
+          <div class="ob-4ds__flow">
+            <span class="ob-4ds__step">DELAY</span>
+            <span class="ob-4ds__arrow">→</span>
+            <span class="ob-4ds__step">DENY</span>
+            <span class="ob-4ds__arrow">→</span>
+            <span class="ob-4ds__step">DEFEND</span>
+            <span class="ob-4ds__arrow">→</span>
+            <span class="ob-4ds__step">DEFER</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);">
+            <div>
+              <p style="font-family:var(--font-mono);font-size:0.68rem;color:#4ECCA3;margin-bottom:4px;">DELAY</p>
+              <p style="font-size:0.82rem;color:var(--ob-text-muted);font-style:italic;">"We'll get back to you" — they never do.</p>
+            </div>
+            <div>
+              <p style="font-family:var(--font-mono);font-size:0.68rem;color:#4ECCA3;margin-bottom:4px;">DENY</p>
+              <p style="font-size:0.82rem;color:var(--ob-text-muted);font-style:italic;">"You don't qualify" — false negative.</p>
+            </div>
+            <div>
+              <p style="font-family:var(--font-mono);font-size:0.68rem;color:#4ECCA3;margin-bottom:4px;">DEFEND</p>
+              <p style="font-size:0.82rem;color:var(--ob-text-muted);font-style:italic;">"It's policy" — protecting the system, not you.</p>
+            </div>
+            <div>
+              <p style="font-family:var(--font-mono);font-size:0.68rem;color:#4ECCA3;margin-bottom:4px;">DEFER</p>
+              <p style="font-size:0.82rem;color:var(--ob-text-muted);font-style:italic;">"Go somewhere else" — passing the burden.</p>
+            </div>
+          </div>
+
+          <p class="ob-4ds__response" style="margin-top:var(--space-lg);">
+            OHA Response: Document → Quantify → Appeal → Escalate
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── BACK NAV ── -->
+    <section class="ob-section" style="padding-top:0;">
+      <div class="ob-container" style="display:flex;gap:var(--space-md);flex-wrap:wrap;">
+        <a class="ob-btn ob-btn--tertiary" href="index.html">← Back to Home</a>
+        <a class="ob-btn ob-btn--secondary" href="iwu.html">Enter IWU →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="ob-footer">
+    <div class="ob-container">
+      <span class="ob-footer__wordmark">OBINexus · OHA</span>
+      <p class="ob-footer__declaration">
+        The shield that breathes.<br/>
+        <strong>Protection precedes production.</strong>
+      </p>
+      <p class="ob-footer__copy">
+        © 2026 Nnamdi Michael Okpala · @obinexusltd/obix v0.1.x
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/parallax.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

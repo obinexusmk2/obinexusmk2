@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="OBINexus — Constitutional Governance for the Neurodivergent Mind. When Systems Fail, Build Your Own." />
+
+  <title>OBINEXUS — Constitutional Governance for the Neurodivergent Mind</title>
+
+  <!-- OBIX SDK via unpkg (online registry) -->
+  <!-- @obinexusltd/obix-core runtime shim loaded inline below -->
+  <!-- In production: <script type="module" src="https://unpkg.com/@obinexusltd/obix@0.1.0/dist/index.esm.js"></script> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ── Index-only overrides ── */
+    .ob-hero__decoration {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 40%;
+      background: radial-gradient(ellipse at 80% 30%,
+        rgba(74,14,78,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ob-sdk-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,255,255,0.06);
+      border: 1px solid rgba(0,255,255,0.2);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--ob-cyan);
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      transition: background 200ms ease;
+      margin-bottom: var(--space-lg);
+    }
+    .ob-sdk-badge:hover { background: rgba(0,255,255,0.12); }
+    .ob-sdk-badge__dot {
+      width: 6px; height: 6px;
+      background: var(--ob-cyan);
+      border-radius: 50%;
+      animation: ob-breathe 2s ease-in-out infinite;
+    }
+
+    .ob-history-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-md) var(--space-xl);
+      align-items: start;
+      max-width: 700px;
+    }
+    .ob-history-year {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--ob-gold);
+      letter-spacing: 0.05em;
+      padding-top: 2px;
+      white-space: nowrap;
+    }
+    .ob-history-body {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--ob-text-muted);
+      line-height: 1.8;
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255,215,0,0.05);
+      font-style: italic;
+    }
+    .ob-history-body strong { color: var(--ob-text); font-style: normal; }
+
+    .ob-upow-calc {
+      background: var(--ob-soil-surface);
+      border: 1px solid rgba(0,255,255,0.15);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      max-width: 480px;
+    }
+    .ob-upow-calc label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--ob-cyan);
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+    .ob-upow-calc input {
+      width: 100%;
+      background: rgba(0,255,255,0.04);
+      border: 1px solid rgba(0,255,255,0.2);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--ob-text);
+      outline: none;
+      transition: border-color 200ms;
+    }
+    .ob-upow-calc input:focus { border-color: var(--ob-cyan); }
+    .ob-upow-calc__result {
+      margin-top: var(--space-sm);
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--ob-gold);
+      min-height: 2rem;
+    }
+    .ob-upow-calc__label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--ob-text-muted);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background parallax canvas (lotus + hemisphere) -->
+  <canvas id="ob-canvas-bg" aria-hidden="true"></canvas>
+
+  <!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+  <nav class="ob-nav" role="navigation" aria-label="OBINexus main navigation">
+    <a class="ob-nav__wordmark" href="/">OBINexus</a>
+
+    <ul class="ob-nav__links" role="list">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/#sdk">SDK</a></li>
+      <li><a href="/#history">History</a></li>
+      <li><a href="/#rights">Rights</a></li>
+      <li><a href="/#connect">Connect</a></li>
+    </ul>
+
+    <div class="ob-nav__pillar-links" role="list">
+      <a class="oha" href="oha.html">OHA</a>
+      <a class="iwu" href="iwu.html">IWU</a>
+      <a class="iji" href="iji.html">IJI</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════ HERO ══════════════════════════ -->
+  <main>
+    <section class="ob-hero" id="home" aria-label="OBINexus hero">
+      <div class="ob-hero__decoration" aria-hidden="true"></div>
+      <div class="ob-hero__inner ob-container">
+
+        <a class="ob-sdk-badge" href="https://npmjs.com/~obinexusltd" target="_blank" rel="noopener">
+          <span class="ob-sdk-badge__dot"></span>
+          @obinexusltd — 50 packages on npm · v0.1.x
+        </a>
+
+        <p class="ob-hero__eyebrow">@obinexusltd/obix — Heart/Soul SDK</p>
+
+        <h1 class="ob-hero__title ob-glow">OBINEXUS</h1>
+
+        <p class="ob-hero__subtitle">
+          Constitutional Governance for the Neurodivergent Mind
+        </p>
+
+        <!-- Core Declaration -->
+        <div class="ob-hero__declaration ob-breathe" role="region" aria-label="Core Declaration">
+          <p class="ob-hero__declaration-main">
+            BREATHING WITHOUT LIVING IS SUFFERING
+          </p>
+          <p class="ob-hero__declaration-lines">
+            Breathing is Never Optional<br/>
+            Living is Never Optional<br/>
+            <strong style="color:var(--ob-butterfly);font-style:normal;">ONLY Work is Optional</strong>
+          </p>
+        </div>
+
+        <!-- Founder Identity -->
+        <div class="ob-hero__founder" role="contentinfo">
+          <p class="ob-hero__founder-name">NNAMDI MICHAEL OKPALA</p>
+          <p class="ob-hero__founder-title">
+            Prince of Nnewi, Onitsha, Biafra<br/>
+            World's First Ontological Constitutional Researcher<br/>
+            OBINexus Founder
+          </p>
+        </div>
+
+        <!-- Triad -->
+        <div class="ob-hero__triad" role="list" aria-label="Triadic Sovereignty">
+          <div class="ob-hero__triad-item">
+            <span class="ob-hero__triad-glyph" aria-hidden="true">📖</span>
+            <span class="ob-hero__triad-label">UCHE</span>
+            <span class="ob-hero__triad-desc">Knowledge · Small Wisdom</span>
+          </div>
+          <div class="ob-hero__triad-item">
+            <span class="ob-hero__triad-glyph" aria-hidden="true">👑</span>
+            <span class="ob-hero__triad-label">EZE</span>
+            <span class="ob-hero__triad-desc">King · Power to Act</span>
+          </div>
+          <div class="ob-hero__triad-item">
+            <span class="ob-hero__triad-glyph" aria-hidden="true">❤️</span>
+            <span class="ob-hero__triad-label">OBI</span>
+            <span class="ob-hero__triad-desc">Heart · The Nexus</span>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="ob-cta-group">
+          <a class="ob-btn ob-btn--primary" href="/constitution.html">Enter the Constitution</a>
+          <a class="ob-btn ob-btn--secondary" href="#sdk">Explore the SDK</a>
+          <a class="ob-btn ob-btn--tertiary" href="/declaration.html">Read the Declaration</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════ THREE PILLARS ══════════════ -->
+    <section class="ob-section" id="pillars" aria-labelledby="pillars-title">
+      <div class="ob-container">
+        <div class="ob-reveal">
+          <p class="ob-section__label">Three Pillars of Governance</p>
+          <h2 class="ob-section__title" id="pillars-title">OHA · IWU · IJI</h2>
+          <p class="ob-section__subtitle">
+            The constitutional architecture of OBINexus — three interlocking
+            frameworks of protection, law, and order that govern the neurodivergent-first
+            digital sovereignty model.
+          </p>
+        </div>
+
+        <div class="ob-pillars ob-reveal">
+
+          <!-- OHA -->
+          <div class="obix-card obix-card--oha ob-reveal" tabindex="0" role="article">
+            <div class="obix-card__inner">
+              <span class="obix-card__glyph">🛡️</span>
+              <span class="obix-card__roman">PILLAR I</span>
+              <h3 class="obix-card__title">OHA</h3>
+              <p class="obix-card__tagline">"The shield that breathes"</p>
+              <p style="font-size:0.85rem;color:var(--ob-text-muted);line-height:1.7;">
+                Public protection layer. The constitutional guarantee that breathing
+                rights are protected before any other consideration.
+              </p>
+              <ul class="obix-card__principles">
+                <li>Breathing rights are non-negotiable</li>
+                <li>Public infrastructure serves the neurodivergent first</li>
+                <li>Protection precedes production</li>
+              </ul>
+              <a class="obix-card__cta" href="oha.html">Enter OHA →</a>
+            </div>
+          </div>
+
+          <!-- IWU -->
+          <div class="obix-card obix-card--iwu ob-reveal" tabindex="0" role="article">
+            <div class="obix-card__inner">
+              <span class="obix-card__glyph">⚖️</span>
+              <span class="obix-card__roman">PILLAR II</span>
+              <h3 class="obix-card__title">IWU</h3>
+              <p class="obix-card__tagline">"The law that learns"</p>
+              <p style="font-size:0.85rem;color:var(--ob-text-muted);line-height:1.7;">
+                Adaptive legal framework — law designed by the neurodivergent,
+                for the neurodivergent, embracing fluid ontology-based governance.
+              </p>
+              <ul class="obix-card__principles">
+                <li>Law adapts to cognition, not cognition to law</li>
+                <li>Policy is living documentation</li>
+                <li>Compliance through coherence, not coercion</li>
+              </ul>
+              <a class="obix-card__cta" href="iwu.html">Enter IWU →</a>
+            </div>
+          </div>
+
+          <!-- IJI -->
+          <div class="obix-card obix-card--iji ob-reveal" tabindex="0" role="article">
+            <div class="obix-card__inner">
+              <span class="obix-card__glyph">🌀</span>
+              <span class="obix-card__roman">PILLAR III</span>
+              <h3 class="obix-card__title">IJI</h3>
+              <p class="obix-card__tagline">"The equity that evolves"</p>
+              <p style="font-size:0.85rem;color:var(--ob-text-muted);line-height:1.7;">
+                Operational order of OBINexus — governance that rotates, breathes,
+                and transforms. Equity is not a destination, but a continuous process.
+              </p>
+              <ul class="obix-card__principles">
+                <li>Governance rotates to prevent stagnation</li>
+                <li>Equity is measured in breath, not benchmarks</li>
+                <li>Order serves life, life does not serve order</li>
+              </ul>
+              <a class="obix-card__cta" href="iji.html">Enter IJI →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ══════════════ SDK SECTION ══════════════ -->
+    <section class="ob-section" id="sdk" aria-labelledby="sdk-title">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Technical Infrastructure</p>
+        <h2 class="ob-section__title" id="sdk-title">The OBIX SDK</h2>
+        <p class="ob-section__subtitle">
+          50 packages. Zero React dependency. Pure OBIX runtime with libpolycall-v1 telemetry.
+          Constitutional computing, data-oriented, accessibility-first.
+        </p>
+
+        <div style="margin-top: var(--space-lg); margin-bottom: var(--space-md);">
+          <pre style="background:var(--ob-soil-surface);border:1px solid rgba(255,215,0,0.1);border-radius:8px;padding:1.25rem;overflow-x:auto;font-family:var(--font-mono);font-size:0.78rem;color:var(--ob-cyan);line-height:1.8;"><span style="color:rgba(160,160,176,0.5);"># Install the OBIX runtime</span>
+npm install @obinexusltd/obix-core
+npm install @obinexusltd/obix-cli --save-dev
+
+<span style="color:rgba(160,160,176,0.5);"># Build your OBIX project</span>
+npx @obinexusltd/obix-cli build --target esm,cjs --out dist
+
+<span style="color:rgba(160,160,176,0.5);"># Validate JSON schema</span>
+npx @obinexusltd/obix-cli validate ./schema/component.json
+
+<span style="color:rgba(160,160,176,0.5);"># Hot-swap development</span>
+npx @obinexusltd/obix-cli hot-swap --watch src --delay 500</pre>
+        </div>
+
+        <!-- SDK Carousel -->
+        <div class="ob-sdk-strip">
+          <p class="ob-sdk-strip__label" aria-label="SDK Packages">
+            @obinexusltd — 50 packages · MIT Licensed
+          </p>
+          <obix-carousel id="sdk-carousel" aria-label="OBIX SDK package list"></obix-carousel>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ══════════════ CONSTITUTIONAL CALCULATOR ══════════════ -->
+    <section class="ob-section" id="constitution" aria-labelledby="const-title">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">OpenSense 7×7 Framework</p>
+        <h2 class="ob-section__title" id="const-title">Constitutional Mathematics</h2>
+        <p class="ob-section__subtitle">
+          U(49,14) = 682 minimum guaranteed sensory units.
+          49<sup>14</sup> = 459,986,536,544,739,960,976,801 constitutional breathing spaces.
+        </p>
+
+        <!-- UPOW Calculator -->
+        <div class="ob-upow-calc ob-reveal" role="region" aria-label="UPOW Constitutional Calculator">
+          <label for="ob-upow-input">UPOW Calculator — compute UPOW(n) = 3ⁿ</label>
+          <input id="ob-upow-input" type="number" min="0" max="50"
+                 placeholder="Enter n (e.g. 3, 6, 18)" aria-label="UPOW exponent n" />
+          <div class="ob-upow-calc__result" id="ob-upow-output" aria-live="polite">—</div>
+          <p class="ob-upow-calc__label">UPOW(3) = 27 · UPOW(6) = 729 · UPOW(18) = 387,420,489</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ══════════════ THREE GENERATIONS ══════════════ -->
+    <section class="ob-section" id="history" aria-labelledby="history-title">
+      <div class="ob-container ob-reveal">
+        <p class="ob-section__label">Historical Context</p>
+        <h2 class="ob-section__title" id="history-title">Three Generations of Breath</h2>
+
+        <div class="ob-history-grid">
+          <span class="ob-history-year">1948</span>
+          <div class="ob-history-body">
+            <strong>Before the War</strong> — The foundation of breath, before fragmentation.
+            The Biafran Pound equaled the British Pound. Sovereignty intact.
+          </div>
+
+          <span class="ob-history-year">1967–1970</span>
+          <div class="ob-history-body">
+            <strong>Biafran War</strong> — Blood, sweat, and tears across borders.
+            Two generations of breath interrupted. The infrastructure of a people
+            dismantled by external force.
+          </div>
+
+          <span class="ob-history-year">2025–2026</span>
+          <div class="ob-history-body">
+            <strong>Constitutional Reconstruction</strong> — The return of the riches.
+            OBINexus rises. <em>When systems fail, build your own.</em>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ob-divider"></div>
+
+    <!-- ══════════════ CONNECT ══════════════ -->
+    <section class="ob-section" id="connect" aria-labelledby="connect-title">
+      <div class="ob-container ob-reveal" style="text-align:center;">
+        <p class="ob-section__label">Connect</p>
+        <h2 class="ob-section__title" id="connect-title" style="margin:0 auto;">Reach the Nexus</h2>
+
+        <div style="margin-top:var(--space-lg);display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;">
+          <a class="ob-btn ob-btn--secondary" href="mailto:obinexusproject@gmail.com">
+            ✉ obinexusproject@gmail.com
+          </a>
+          <a class="ob-btn ob-btn--tertiary"
+             href="https://github.com/obinexusmk2" target="_blank" rel="noopener">
+            GitHub @obinexusmk2
+          </a>
+          <a class="ob-btn ob-btn--tertiary"
+             href="https://npmjs.com/~obinexusltd" target="_blank" rel="noopener">
+            npm @obinexusltd
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════ FOOTER ════════════════════════ -->
+  <footer class="ob-footer" role="contentinfo">
+    <div class="ob-container">
+      <span class="ob-footer__wordmark ob-glow">OBINexus</span>
+
+      <div class="ob-footer__declaration" aria-label="Final declaration">
+        I will not become what sought to break me.<br/>
+        I will build what heals us all via Oha.<br/><br/>
+        <strong>Protected to public.</strong><br/>
+        Breathing is not optional.<br/>
+        Survival is not optional.<br/>
+        Work is optional.<br/><br/>
+        <em>My wheel moves on. Does yours?</em>
+      </div>
+
+      <nav class="ob-footer__links" aria-label="Footer navigation">
+        <a href="/oha.html">OHA</a>
+        <a href="/iwu.html">IWU</a>
+        <a href="/iji.html">IJI</a>
+        <a href="https://github.com/obinexusmk2" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://npmjs.com/~obinexusltd" target="_blank" rel="noopener">npm</a>
+        <a href="https://www.youtube.com/@OBINexus" target="_blank" rel="noopener">YouTube</a>
+      </nav>
+
+      <p class="ob-footer__copy">
+        © 2026 Nnamdi Michael Okpala · OBINexus ·
+        Licensed under Child Consensus, Not Adult Consent ·
+        @obinexusltd/obix v0.1.x
+      </p>
+    </div>
+  </footer>
+
+  <!-- OBIX SDK Components (via project-local files) -->
+  <script src="js/parallax.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/carousel.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
